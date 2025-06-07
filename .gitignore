@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+old/
+output/
+temp/
+Fonts/sources
+local-models/
