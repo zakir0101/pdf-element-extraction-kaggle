@@ -145,39 +145,39 @@ def predict_advance():
                     continue
                 pdf_bytes_list.append(images_bytes_to_pdf_bytes(im_bytes))
 
-        (
-            infer_results,
-            all_image_lists,
-            all_pdf_docs,
-            lang_list,
-            ocr_enabled_list,
-        ) = pipeline_doc_analyze(
-            pdf_bytes_list,
-            ["ch_server"] * len(pdf_bytes_list),
-            parse_method="ocr",
-            formula_enable=True,
-            table_enable=True,
-        )
-
-        for idx, model_list in enumerate(infer_results):
-            model_json = copy.deepcopy(model_list)
-            images_list = all_image_lists[idx]
-            pdf_doc = all_pdf_docs[idx]
-            _lang = "ch_server"
-            _ocr_enable = True
-            p_formula_enable = True
-            middle_json = pipeline_result_to_middle_json(
-                model_list,
-                images_list,
-                pdf_doc,
-                image_writer_advance,
-                _lang,
-                _ocr_enable,
-                p_formula_enable,
+            (
+                infer_results,
+                all_image_lists,
+                all_pdf_docs,
+                lang_list,
+                ocr_enabled_list,
+            ) = pipeline_doc_analyze(
+                pdf_bytes_list,
+                ["ch_server"] * len(pdf_bytes_list),
+                parse_method="ocr",
+                formula_enable=True,
+                table_enable=True,
             )
 
-            pdf_info_list = middle_json["pdf_info"]
-            proccess_pdf_info(pdf_info_list, idx)
+            for idx, model_list in enumerate(infer_results):
+                model_json = copy.deepcopy(model_list)
+                images_list = all_image_lists[idx]
+                pdf_doc = all_pdf_docs[idx]
+                _lang = "ch_server"
+                _ocr_enable = True
+                p_formula_enable = True
+                middle_json = pipeline_result_to_middle_json(
+                    model_list,
+                    images_list,
+                    pdf_doc,
+                    image_writer_advance,
+                    _lang,
+                    _ocr_enable,
+                    p_formula_enable,
+                )
+
+                pdf_info_list = middle_json["pdf_info"]
+                proccess_pdf_info(pdf_info_list, idx)
 
         else:
 
@@ -196,7 +196,7 @@ def predict_advance():
 
                 pdf_info_list = middle_json.get("pdf_info")
 
-            proccess_pdf_info(pdf_info_list, idx)
+                proccess_pdf_info(pdf_info_list, i)
 
         print("\n***********************  [DONE]  ***********************\n")
 
