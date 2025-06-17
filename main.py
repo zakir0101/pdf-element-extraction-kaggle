@@ -5,6 +5,10 @@ from os.path import sep
 # import fitz
 # from PIL import Image
 from flask import Flask, request, jsonify, send_file, Response
+from mineru.cli.common import (
+    images_bytes_to_pdf_bytes,
+    convert_pdf_bytes_to_bytes_by_pypdfium2,
+)
 from zipfile import ZipFile
 import json
 from io import BytesIO
@@ -212,6 +216,9 @@ def predict_advance():
             # data_sets.append(ImageDataset(im_bytes, lang=lang))
 
             # New VLM analysis per image
+
+            pdf_bytes = images_bytes_to_pdf_bytes(im_bytes)
+            # pdf_bytes = convert_pdf_bytes_to_bytes_by_pypdfium2(pdf_bytes)
             middle_json, _ = vlm_doc_analyze(
                 im_bytes,
                 image_writer=image_writer_advance,
