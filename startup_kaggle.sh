@@ -24,9 +24,9 @@ echo "*********************************************************************"
 echo "*********************** START PIP INSTALL ***************************"
 echo $'*********************************************************************\n'
 
-source $1/bin/activate
-pip install uv
-uv pip install -r requirements-server.txt
+# source $1/bin/activate
+# pip install uv
+pip install -r requirements-server.txt
 .txt
 
 echo $'\n***************************  [DONE]  *******************************\n'
