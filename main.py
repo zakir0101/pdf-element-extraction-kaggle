@@ -215,7 +215,7 @@ def predict_advance():
             middle_json, _ = vlm_doc_analyze(
                 im_bytes,
                 image_writer=image_writer_advance,
-                backend="sglang-engine",
+                backend="vlm-transformers",  # sglang-engine
             )
 
             # Assuming middle_json["pdf_info"] is a dictionary for a single image.
