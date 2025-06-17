@@ -245,10 +245,12 @@ def predict_advance():
             pprint(pdf_info)
 
             md_cont = vlm_union_make(
-                pdf_info, MakeMode.MM_MD, image_dir_basename_advance
+                pdf_info_list, MakeMode.MM_MD, image_dir_basename_advance
             )
             cont = vlm_union_make(
-                pdf_info, MakeMode.CONTENT_LIST, image_dir_basename_advance
+                pdf_info_list,
+                MakeMode.CONTENT_LIST,
+                image_dir_basename_advance,
             )
             para_blocks = pdf_info.get("para_blocks", [])
             page_size = pdf_info.get("page_size", [])
