@@ -188,6 +188,7 @@ def predict_advance():
         print(fo)
         sep = fo.get("seperator").encode("latin")
         idx = fo.get("idx")
+        model = fo.get("mode")
         # data_sets = [] # Old way of collecting datasets
         # lang = "ch_server" # VLM models often auto-detect language
 
@@ -223,7 +224,7 @@ def predict_advance():
             middle_json, _ = vlm_doc_analyze(
                 pdf_bytes,
                 image_writer=image_writer_advance,
-                backend="transformers",  # sglang-engine
+                backend=model,  # sglang-engine
             )
 
             pprint(middle_json)
