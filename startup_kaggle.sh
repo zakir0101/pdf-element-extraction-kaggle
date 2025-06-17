@@ -26,7 +26,8 @@ echo $'*********************************************************************\n'
 
 source $1/bin/activate
 pip install uv
-uv pip install -r requirements-local.txt
+uv pip install -r requirements-server.txt
+.txt
 
 echo $'\n***************************  [DONE]  *******************************\n'
 
