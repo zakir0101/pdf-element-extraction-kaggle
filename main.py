@@ -210,6 +210,8 @@ def predict_advance():
             "page-size": {},
         }
 
+        print("\n**********************************************************")
+        print("********************* Start Processing *********************\n")
         for i, im_bytes in enumerate(image_group_bytes.split(sep)):
             if not im_bytes:
                 continue
@@ -227,7 +229,6 @@ def predict_advance():
                 backend=model,  # sglang-engine
             )
 
-            pprint(middle_json)
             # Assuming middle_json["pdf_info"] is a dictionary for a single image.
             # If it can be a list (e.g. if one image could have multiple 'pages' in VLM's view),
             # we might need to adjust. For now, proceed as if it's a dict or the first item of a list.
@@ -292,6 +293,7 @@ def predict_advance():
         # final_res["middle-json"][id] = para_blocks
         # final_res["page-size"][id] = page_size
 
+        print("\n***********************  [DONE]  ***********************\n")
         return jsonify(final_res), 200
 
     except Exception as e:
