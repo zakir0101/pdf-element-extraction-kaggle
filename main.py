@@ -79,8 +79,6 @@ def proccess_pdf_info(pdf_info_list, index):
     else:
         pdf_info = {}
 
-    pprint(pdf_info)
-
     md_cont = vlm_union_make(
         pdf_info_list, MakeMode.MM_MD, image_dir_basename_advance
     )
