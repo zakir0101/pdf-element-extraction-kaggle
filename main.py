@@ -220,7 +220,7 @@ def predict_advance():
             pdf_bytes = images_bytes_to_pdf_bytes(im_bytes)
             # pdf_bytes = convert_pdf_bytes_to_bytes_by_pypdfium2(pdf_bytes)
             middle_json, _ = vlm_doc_analyze(
-                im_bytes,
+                pdf_bytes,
                 image_writer=image_writer_advance,
                 backend="transformers",  # sglang-engine
             )
