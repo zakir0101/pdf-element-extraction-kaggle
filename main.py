@@ -1,4 +1,5 @@
 import os
+import sys
 from os.path import sep
 
 # import fitz
@@ -9,7 +10,8 @@ import json
 from io import BytesIO
 from pyngrok import ngrok
 import traceback
-from kaggle_secrets import UserSecretsClient
+
+# from kaggle_secrets import UserSecretsClient
 
 import copy  # If needed for deep copying data
 from mineru.backend.vlm.vlm_analyze import doc_analyze as vlm_doc_analyze
@@ -35,9 +37,10 @@ from mineru.data.data_reader_writer import (
 
 # --- 1. SETUP THE TUNNEL ---
 # Authenticate ngrok using the secret you stored
-user_secrets = UserSecretsClient()
-ngrok.set_auth_token(user_secrets.get_secret("NGROK_AUTH_TOKEN"))
 
+# user_secrets = UserSecretsClient()
+# ngrok.set_auth_token(user_secrets.get_secret("NGROK_AUTH_TOKEN"))
+ngrok.set_auth_token(sys.argv[1] if len(sys.argv) > 1 else None)
 public_url = ngrok.connect(5000)
 print(f"✅ Kaggle is now live at: {public_url}")
 print(public_url)
