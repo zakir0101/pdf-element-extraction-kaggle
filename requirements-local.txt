@@ -1,0 +1,17 @@
+huggingface-hub==0.32.4
+jupytext==1.17.2
+Flask==3.1.1
+pyngrok==7.2.11
+
+#--find-links https://download.pytorch.org/whl/torch_stable.html
+--find-links https://download.pytorch.org/whl/cpu  
+torchvision==0.22.1
+#0.22.1+cpu
+
+#--find-links https://download.pytorch.org/whl/torch_stable.html
+--find-links https://download.pytorch.org/whl/cpu  
+torch==2.7.1 #+cpu   
+# 2.7.1+cpu
+
+#doclayout_yolo==0.0.2b1
+mineru[core]
