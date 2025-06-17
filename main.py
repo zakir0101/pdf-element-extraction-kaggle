@@ -30,6 +30,7 @@ from mineru.utils.enum_class import MakeMode
 from mineru.data.data_reader_writer import (
     FileBasedDataWriter,
 )
+from pprint import pprint
 
 # from magic_pdf.data.dataset import ImageDataset
 # from magic_pdf.model.doc_analyze_by_custom_model import (
@@ -225,6 +226,7 @@ def predict_advance():
                 backend="transformers",  # sglang-engine
             )
 
+            pprint(middle_json)
             # Assuming middle_json["pdf_info"] is a dictionary for a single image.
             # If it can be a list (e.g. if one image could have multiple 'pages' in VLM's view),
             # we might need to adjust. For now, proceed as if it's a dict or the first item of a list.
@@ -239,6 +241,8 @@ def predict_advance():
                 pdf_info = pdf_info_list
             else:  # Fallback if pdf_info is not found or empty
                 pdf_info = {}
+
+            pprint(pdf_info)
 
             md_cont = vlm_union_make(
                 pdf_info, MakeMode.MM_MD, image_dir_basename_advance
