@@ -9,21 +9,28 @@ from pprint import pprint
 from zipfile import ZipFile
 
 from flask import Flask, Response, jsonify, request, send_file
-from mineru.backend.pipeline.model_json_to_middle_json import \
-    result_to_middle_json as pipeline_result_to_middle_json
-from mineru.backend.pipeline.pipeline_analyze import \
-    doc_analyze as pipeline_doc_analyze
+from mineru.backend.pipeline.model_json_to_middle_json import (
+    result_to_middle_json as pipeline_result_to_middle_json,
+)
+from mineru.backend.pipeline.pipeline_analyze import (
+    doc_analyze as pipeline_doc_analyze,
+)
 from mineru.backend.vlm.vlm_analyze import doc_analyze as vlm_doc_analyze
-from mineru.backend.vlm.vlm_middle_json_mkcontent import \
-    union_make as vlm_union_make
-from mineru.cli.common import (convert_pdf_bytes_to_bytes_by_pypdfium2,
-                               images_bytes_to_pdf_bytes)
+from mineru.backend.vlm.vlm_middle_json_mkcontent import (
+    union_make as vlm_union_make,
+)
+from mineru.cli.common import (
+    convert_pdf_bytes_to_bytes_by_pypdfium2,
+    images_bytes_to_pdf_bytes,
+)
 from mineru.data.data_reader_writer import FileBasedDataWriter
 from mineru.utils.enum_class import MakeMode
 from pyngrok import ngrok
 
-ngrok.set_auth_token(sys.argv[1] if len(sys.argv) > 1 else os.environ['NGROK_KEY'])
-public_url = ngrok.connect(5000)
+ngrok.set_auth_token(
+    sys.argv[1] if len(sys.argv) > 1 else os.environ["NGROK_KEY"]
+)
+public_url = ngrok.connect(3000)
 print(f"✅ Kaggle is now live at: {public_url}")
 print(public_url)
 
@@ -191,4 +198,4 @@ def predict_advance():
 
 
 # This will run the Flask app and keep the notebook cell running.
-app.run(port=5000)
+app.run(port=3000)
