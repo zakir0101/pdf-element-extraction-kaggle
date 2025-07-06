@@ -10,7 +10,7 @@ on:
 jobs:
   build-and-push:
     # Use a free Linux virtual machine provided by GitHub
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-4-cores
 
     steps:
       # Step 1: Check out your repository code so the runner can access it
