@@ -7,3 +7,4 @@ output/
 temp/
 Fonts/sources
 local-models/
+.temp/

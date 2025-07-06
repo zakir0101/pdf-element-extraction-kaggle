@@ -1,49 +1,33 @@
+import copy
+import json
 import os
 import sys
-from os.path import sep
-
-# import fitz
-# from PIL import Image
-from flask import Flask, request, jsonify, send_file, Response
-from mineru.cli.common import (
-    images_bytes_to_pdf_bytes,
-    convert_pdf_bytes_to_bytes_by_pypdfium2,
-)
-from zipfile import ZipFile
-import json
-from io import BytesIO
-from pyngrok import ngrok
 import traceback
-
-
-import copy  # If needed for deep copying data
-from mineru.backend.vlm.vlm_analyze import doc_analyze as vlm_doc_analyze
-from mineru.backend.pipeline.pipeline_analyze import (
-    doc_analyze as pipeline_doc_analyze,
-)
-
-from mineru.backend.pipeline.model_json_to_middle_json import (
-    result_to_middle_json as pipeline_result_to_middle_json,
-)
-from mineru.backend.vlm.vlm_middle_json_mkcontent import (
-    union_make as vlm_union_make,
-)
-from mineru.utils.enum_class import MakeMode
-
-
-from mineru.data.data_reader_writer import (
-    FileBasedDataWriter,
-)
+from io import BytesIO
+from os.path import sep
 from pprint import pprint
+from zipfile import ZipFile
 
+from flask import Flask, Response, jsonify, request, send_file
+from mineru.backend.pipeline.model_json_to_middle_json import \
+    result_to_middle_json as pipeline_result_to_middle_json
+from mineru.backend.pipeline.pipeline_analyze import \
+    doc_analyze as pipeline_doc_analyze
+from mineru.backend.vlm.vlm_analyze import doc_analyze as vlm_doc_analyze
+from mineru.backend.vlm.vlm_middle_json_mkcontent import \
+    union_make as vlm_union_make
+from mineru.cli.common import (convert_pdf_bytes_to_bytes_by_pypdfium2,
+                               images_bytes_to_pdf_bytes)
+from mineru.data.data_reader_writer import FileBasedDataWriter
+from mineru.utils.enum_class import MakeMode
+from pyngrok import ngrok
 
-ngrok.set_auth_token(sys.argv[1] if len(sys.argv) > 1 else None)
+ngrok.set_auth_token(sys.argv[1] if len(sys.argv) > 1 else os.environ['NGROK_KEY'])
 public_url = ngrok.connect(5000)
 print(f"✅ Kaggle is now live at: {public_url}")
 print(public_url)
 
 
-# --- 3. CREATE THE FLASK APP ---
 app = Flask(__name__)
 
 
